@@ -65,7 +65,8 @@ toml::
 
 test::
 	@echo "Running testsuite"
-	CGO_ENABLED=0 go test $(BUILD_TAGS) ./...
+#	CGO_ENABLED=0 go test $(BUILD_TAGS) ./...
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go test $(BUILD_TAGS) ./...
 
 porcelain::
 	gofmt -w -l $$(find . -name '*.go')
@@ -74,7 +75,8 @@ porcelain::
 
 build::
 	@echo Version: $(VERSION) $(SHA) $(BUILD_DATE)
-	CGO_ENABLED=0 go build -v $(BUILD_TAGS) $(BUILD_ARGS)
+#	CGO_ENABLED=0 go build -v $(BUILD_TAGS) $(BUILD_ARGS)
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -v $(BUILD_TAGS) $(BUILD_ARGS)
 
 snapshot::
 	goreleaser --snapshot --skip publish --clean
